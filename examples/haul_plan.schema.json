@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EDHaulAssist haul plan",
+  "description": "A hauling plan imported by the EDHaulAssist EDMC plugin: a list of Runs, each a list of Stops at which commodities are bought. The Sell Location is not part of the file; it is configured in the plugin. Properties not listed here are ignored by the plugin.",
+  "type": "object",
+  "required": ["schema", "runs"],
+  "properties": {
+    "schema": {
+      "description": "Format version. The plugin reads version 1 only.",
+      "const": 1
+    },
+    "name": {
+      "description": "A label for the plan, shown in the EDMC window.",
+      "type": "string"
+    },
+    "runs": {
+      "description": "The round trips, flown in the order listed. Each ends with a delivery at the Sell Location.",
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/run" }
+    }
+  },
+  "$defs": {
+    "run": {
+      "description": "One round trip: every Stop, then the Sell Location.",
+      "type": "object",
+      "required": ["stops"],
+      "properties": {
+        "stops": {
+          "description": "The stations to buy at. Guidance follows the order listed, but they may be visited in any order.",
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/stop" }
+        }
+      }
+    },
+    "stop": {
+      "description": "A station at which one or more commodities are bought.",
+      "type": "object",
+      "required": ["system", "station", "commodities"],
+      "properties": {
+        "system": {
+          "description": "The star system, spelled exactly as the galaxy map spells it. This is the text copied to the clipboard.",
+          "$ref": "#/$defs/nonBlank"
+        },
+        "station": {
+          "description": "The station name as the game shows it. Matched against the journal ignoring case.",
+          "$ref": "#/$defs/nonBlank"
+        },
+        "commodities": {
+          "description": "What to buy here. A commodity listed more than once at the same Stop is treated as one purchase of the combined quantity.",
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/commodity" }
+        }
+      }
+    },
+    "commodity": {
+      "type": "object",
+      "required": ["name", "quantity"],
+      "properties": {
+        "name": {
+          "description": "The in-game name ('Land Enrichment Systems') or the journal symbol ('terrainenrichmentsystems'). Case, spaces and punctuation do not matter. An unrecognised name loads with a warning.",
+          "$ref": "#/$defs/nonBlank"
+        },
+        "quantity": {
+          "description": "Tonnes to buy.",
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "nonBlank": {
+      "type": "string",
+      "pattern": "\\S"
+    }
+  }
+}

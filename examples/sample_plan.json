@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "name": "Huang Base - sample",
+  "runs": [
+    {
+      "stops": [
+        {
+          "system": "Eagle Sector KC-V c2-2",
+          "station": "Anna Khammatova",
+          "commodities": [
+            {"name": "Liquid oxygen", "quantity": 824},
+            {"name": "Titanium", "quantity": 474}
+          ]
+        }
+      ]
+    },
+    {
+      "stops": [
+        {
+          "system": "Eagle Sector KC-V c2-2",
+          "station": "Anna Khammatova",
+          "commodities": [
+            {"name": "Titanium", "quantity": 698}
+          ]
+        },
+        {
+          "system": "Sol",
+          "station": "Daedalus",
+          "commodities": [
+            {"name": "Steel", "quantity": 400},
+            {"name": "CMM Composite", "quantity": 200}
+          ]
+        }
+      ]
+    },
+    {
+      "stops": [
+        {
+          "system": "Sol",
+          "station": "Daedalus",
+          "commodities": [
+            {"name": "Land Enrichment Systems", "quantity": 60},
+            {"name": "Steel", "quantity": 540}
+          ]
+        }
+      ]
+    }
+  ]
+}
