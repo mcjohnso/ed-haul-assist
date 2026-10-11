@@ -3,7 +3,7 @@
 All notable changes to EDHaulAssist. Versions follow [SemVer](https://semver.org/);
 `__version__` in `EDHaulAssist/load.py` is authoritative and the git tag must match it.
 
-## [0.1.0] - unreleased
+## [0.1.0] - 2026-10-11
 
 ### Added
 - Import a haul plan (schema 1): Runs, each a list of Stops, each a station with commodities and
